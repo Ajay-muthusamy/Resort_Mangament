@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+
+import { Outlet, Link } from "react-router-dom";
+
 import oceanvillaimage from "../../../assets/ocean-villa.jpg";
 import {
   MdEventAvailable,
@@ -49,7 +52,7 @@ const OceanVilla = () => {
             View Details
           </button>
           <button type="button" className="btn btn-success">
-            Book Now
+            <Link to="/BookResort" className="text-decoration-none text-white">Book Now</Link>
           </button>
         </div>
       </div>
@@ -143,6 +146,7 @@ const OceanVilla = () => {
           </Button>
         </Modal.Footer>
       </Modal>
+      <Outlet />
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import mountvillaimage from "../../../assets/mountvilla.jpg";
+import { Outlet, Link } from "react-router-dom";
 import {
   MdEventAvailable,
   MdLunchDining,
@@ -40,9 +41,8 @@ const Mountvilla = () => {
             View Details
           </button>
           <button type="button" className="btn btn-success">
-            Book Now
+            <Link to="/MountResort"   className="text-decoration-none text-white">Book Now</Link>
           </button>
-          
         </div>
         <img
           src={mountvillaimage}
@@ -141,6 +141,7 @@ const Mountvilla = () => {
           </Button>
         </Modal.Footer>
       </Modal>
+      <Outlet />
     </div>
   );
 };
