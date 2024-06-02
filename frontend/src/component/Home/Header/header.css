@@ -1,0 +1,41 @@
+.text-container{
+    width: 50%;
+}
+.header{
+    margin-top: 7%;
+}
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.resortimage{
+    float: left; /* Or right */
+    margin: 0 15px 15px 0; /* Adjust margins as needed */
+    width: 200px; /* Set the desired width */
+    animation: float 3s ease-in-out infinite;
+}
+.txt-1{
+    color: orange;
+}
+.avail{
+    color: green;
+}
+.mark
+{
+    background-color: red;
+}
+.custom-modal .modal-dialog {
+    max-width: 80%; /* Adjust the width as needed */
+}
+.cancel
+{
+    color: red;
+}

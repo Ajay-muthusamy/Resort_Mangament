@@ -1,0 +1,57 @@
+#cutsom-width {
+    width: 500px; 
+  }
+  
+#custom-city {
+    width: 330px; 
+  }
+  
+#custom-phone {
+    width: 500px; 
+  }
+  
+#custom-check {
+    width: 245px; 
+  }
+  
+  .important {
+    color: red; 
+  }
+  #people{
+    width: 220px;
+  }
+  
+  @media screen and (max-width: 500px) {
+   
+    #cutsom-width {
+        width: 270px; 
+      }
+      
+    #custom-city {
+        width: 280px; 
+      }
+      
+    #custom-phone {
+        width: 280px; 
+      }
+      
+    #custom-check {
+        width: 282px; 
+      }
+      #submit{
+        display: flex;
+        flex-direction: column;
+      }
+      .type{
+        display: flex;
+        flex-direction: column;
+      }
+      .files
+      {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100px;
+      }
+  }
+  
