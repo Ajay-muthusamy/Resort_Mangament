@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import Axios from 'axios';
-
 import "./booking.css";
 import { Outlet, Link } from "react-router-dom";
 
 
 const BookingForm = ({title}) => {
+  const [Resort, setResort] = useState(title);
   const [firstname, setfirstname] = useState("");
   const [lastname, setlastname] = useState("");
   const [address1, setaddress1] = useState("");
@@ -24,6 +24,9 @@ const BookingForm = ({title}) => {
   const [adult, setadult] = useState("");
   const [aged, setaged] = useState("");
 
+  const handleResortNameChange = (e) => {
+    setResort(e.target.value);
+  };
   const handleFirstNameChange = (e) => {
     setfirstname(e.target.value);
   };
@@ -81,6 +84,7 @@ const BookingForm = ({title}) => {
     e.preventDefault();
     try {
       const response = await Axios.post('http://localhost:3000/User/BookingDetails',{
+        Resort,
         firstname,
         lastname,
         address1,
@@ -121,6 +125,7 @@ const BookingForm = ({title}) => {
     } catch (error) {
       
     }
+    console.log(Resort);
     console.log(firstname);
     console.log(lastname);
     console.log(address1);
@@ -147,6 +152,20 @@ const BookingForm = ({title}) => {
       </h3>
       <form onSubmit={handleSubmit} className="p-5">
         <div className="d-flex justify-content-center flex-wrap gap-3 forms">
+        <div className="form-group">
+            <label htmlFor="firstName" className="form-label">
+              Resort
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="cutsom-width"
+              aria-describedby="firstNameHelp"
+              value={Resort}
+              onChange={handleResortNameChange}
+              required
+            />
+          </div>
           <div className="form-group">
             <label htmlFor="firstName" className="form-label">
               First Name<span className="important">*</span>
@@ -184,7 +203,7 @@ const BookingForm = ({title}) => {
             <input
               type="text"
               className="form-control custom-width"
-              id="cutsom-width"
+              id="cutsom-address"
               value={address1}
               onChange={handleAddress1NameChange}
               required
@@ -197,7 +216,7 @@ const BookingForm = ({title}) => {
             <input
               type="text"
               className="form-control custom-width"
-              id="cutsom-width"
+              id="cutsom-address"
               value={address2}
               onChange={handleAddress2NameChange}
             />

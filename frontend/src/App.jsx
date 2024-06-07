@@ -9,8 +9,9 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/BookResort" element={<BookingForm title="Ocean Villa" />} />
+          <Route path="/BookResort" element={<BookingForm title="Ocean Villa Maladives" />} />
           <Route path="/MountResort" element={<BookingForm title="Mountain Villa Munnar" />} />
+          <Route path="/LuxBookResort" element={<BookingForm title="Luxary Resort Coorg" />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -1,7 +1,9 @@
 #cutsom-width {
-    width: 500px; 
+    width: 330px; 
   }
-  
+#cutsom-address{
+  width:500px; 
+}
 #custom-city {
     width: 330px; 
   }
@@ -26,7 +28,9 @@
     #cutsom-width {
         width: 270px; 
       }
-      
+      #cutsom-address{
+        width:270px; 
+      }
     #custom-city {
         width: 280px; 
       }

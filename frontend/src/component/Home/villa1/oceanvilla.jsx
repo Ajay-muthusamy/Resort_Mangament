@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-
+import React, { useEffect, useState } from "react";
+import Axios from "axios";
 import { Outlet, Link } from "react-router-dom";
 
 import oceanvillaimage from "../../../assets/ocean-villa.jpg";
@@ -17,6 +17,37 @@ import { FcServices } from "react-icons/fc";
 import { Button, Modal } from "react-bootstrap";
 
 const OceanVilla = () => {
+  const [data, setData] = useState([]);
+  const [bookingStatus, setBookingStatus] = useState('');
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await Axios.get(
+          "http://localhost:3000/oceanvilla/detail"
+        );
+        setData(response.data);
+      } catch (error) {
+        console.log("Error in displaying data from oceanvilla table");
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const isbooked = async () => {
+      try {
+        const resBooked = await Axios.get(
+          "http://localhost:3000/Resort/isBooked"
+        );
+        setBookingStatus(resBooked.data);
+      } catch (error) {
+        console.log("error is ResortBooking Checking");
+      }
+    };
+    isbooked();
+  }, []);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -41,9 +72,9 @@ const OceanVilla = () => {
             waters. Private infinity pools, personalized service. Perfect for
             romance or family. Discover paradise."
           </p>
-          <h6 className="avail">
-            <MdEventAvailable /> Available
-          </h6>
+
+          {bookingStatus && <p>{bookingStatus}</p>}
+
           <button
             type="button"
             className="btn btn-outline-primary me-4"
@@ -52,7 +83,9 @@ const OceanVilla = () => {
             View Details
           </button>
           <button type="button" className="btn btn-success">
-            <Link to="/BookResort" className="text-decoration-none text-white">Book Now</Link>
+            <Link to="/BookResort" className="text-decoration-none text-white">
+              Book Now
+            </Link>
           </button>
         </div>
       </div>
@@ -61,84 +94,67 @@ const OceanVilla = () => {
           <Modal.Title>Ocean Villa</Modal.Title>
         </Modal.Header>
         <Modal.Body className="p-5">
-          <p>
-            <IoLocationSharp /> Maldives, Indian Ocean.
-          </p>
-          <bold>
-            <p>
-              <FaCity /> Accommodation:
-            </p>
-          </bold>
-          <ul>
-            <li>Luxurious overwater bungalows or beach villas.</li>
-            <li>
-              Modern amenities, some with unique features like glass floors.
-            </li>
-          </ul>
-          <p>
-            <MdOutlineReduceCapacity /> Capacity:
-          </p>
-          <ul>
-            <li>The resort can accommodate up to 10 guests at a time.</li>
-          </ul>
-          <p>
-            <MdLunchDining /> Dining:
-          </p>
-          <ul>
-            <li>Multiple restaurants offering diverse cuisines.</li>
-            <li>Romantic beach dinners, bars with ocean views.</li>
-          </ul>
-          <p>
-            <MdLocalActivity /> Activities:
-          </p>
-          <ul>
-            <li>Water sports, excursions, wellness activities.</li>
-            <li>Indoor options like billiards and board games.</li>
-          </ul>
-          <p>
-            <MdOutlineFamilyRestroom /> Family:
-          </p>
-          <ul>
-            <li>Kids' clubs, family-friendly amenities, excursions.</li>
-          </ul>
-          <p>
-            <FcServices /> Services:
-          </p>
-          <ul>
-            <li>
-              24-hour concierge, personalized services, airport transfers.
-            </li>
-          </ul>
-          <p>
-            <MdBedroomParent /> Rent:
-          </p>
-          <ul>
-            <li>
-              Day rates for a standard room can range from approximately{" "}
-              <mark>14,000 INR to 56,000 INR </mark> or more per person per day.
-            </li>
-            <li>
-              Day rates for overwater bungalows or beach villas can start from
-              approximately 35,000 INR to 105,000 INR or higher per person per
-              day.
-            </li>
-          </ul>
-          <h3>Note:</h3>
-          <h6>
-            Certainly! Here's a condensed version:{" "}
-            <span className="mark">
-              "Free cancellation is available within 5 days of booking
-            </span>
-            . After this period, a cancellation fee may apply."
-          </h6>
-          <p className="p-5">
-            "50% refund available for cancellations made after the 5-day booking
-            period."
-          </p>
-          <p>
-            You're welcome! If you have any more questions or need further
-            assistance, feel free to reach out. I'm here to help!
-          </p>
+          {data.map((response, index) => (
+            <div key={index}>
+              <p>
+                <IoLocationSharp /> {response.location}
+              </p>
+              <p>
+                <FaCity /> <strong>Accommodation:</strong>
+              </p>
+              <ul>
+                <li>{response.accommodation}</li>
+              </ul>
+              <p>
+                <MdOutlineReduceCapacity /> <strong>Capacity:</strong>
+              </p>
+              <ul>
+                <li>{response.capacity}</li>
+              </ul>
+              <p>
+                <MdLunchDining /> <strong>Dining:</strong>
+              </p>
+              <ul>
+                <li>{response.dining}</li>
+              </ul>
+              <p>
+                <MdOutlineFamilyRestroom /> <strong>Family:</strong>
+              </p>
+              <ul>
+                <li>{response.family}</li>
+              </ul>
+              <p>
+                <FcServices /> <strong>Services:</strong>
+              </p>
+              <ul>
+                <li>{response.service}</li>
+              </ul>
+              <p>
+                <MdBedroomParent /> <strong>Rent:</strong>
+              </p>
+              <ul>
+                <li>
+                  Day rates for a standard room can range from approximately{" "}
+                  <mark style={{ backgroundColor: "red", color: "white" }}>
+                    {response.rent} INR
+                  </mark>
+                </li>
+              </ul>
+              <h3>Note:</h3>
+              <h6>
+                Certainly! Here's a condensed version:{" "}
+                <span className="">
+                  "Free cancellation is available within 5 days of booking.
+                  After this period, a cancellation fee may apply."
+                </span>
+              </h6>
+              <p className="p-5">{response.note}</p>
+              <p>
+                You're welcome! If you have any more questions or need further
+                assistance, feel free to reach out. I'm here to help!
+              </p>
+            </div>
+          ))}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
