@@ -6,6 +6,8 @@ import { oceanvilla } from './ResortDetails.js';
 import { isBooked } from './ResortDetails.js';
 import { TotalMemberCount } from './Admin_DB/DataCount.js';
 import { oceanvillaDetail } from './Admin_DB/userResortDetails/UserResorts.js';
+import { PDFGen } from './Admin_DB/PDF/gPdf.js';
+
 
 const app = express();
 const port = 3000;
@@ -87,6 +89,7 @@ app.get('/oceanvilla/detail',oceanvilla)
 app.get('/Resort/isBooked',isBooked)
 app.get('/data/count',TotalMemberCount);
 app.get('/ResortUser/Details',oceanvillaDetail);
+app.get('/generate-pdf/:resort', PDFGen);
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
