@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
+import "../villa1/oceanvilla.css";
 import { Outlet, Link } from "react-router-dom";
 
 import oceanvillaimage from "../../../assets/ocean-villa.jpg";
@@ -15,10 +16,11 @@ import { FaCity } from "react-icons/fa";
 import { MdOutlineReduceCapacity } from "react-icons/md";
 import { FcServices } from "react-icons/fc";
 import { Button, Modal } from "react-bootstrap";
+import { MdOutlineEventAvailable } from "react-icons/md";
+import { CgUnavailable } from "react-icons/cg";
 
 const OceanVilla = () => {
   const [data, setData] = useState([]);
-  const [bookingStatus, setBookingStatus] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,20 +35,6 @@ const OceanVilla = () => {
     };
 
     fetchData();
-  }, []);
-
-  useEffect(() => {
-    const isbooked = async () => {
-      try {
-        const resBooked = await Axios.get(
-          "http://localhost:3000/Resort/isBooked"
-        );
-        setBookingStatus(resBooked.data);
-      } catch (error) {
-        console.log("error is ResortBooking Checking");
-      }
-    };
-    isbooked();
   }, []);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -72,8 +60,19 @@ const OceanVilla = () => {
             waters. Private infinity pools, personalized service. Perfect for
             romance or family. Discover paradise."
           </p>
-
-          {bookingStatus && <p>{bookingStatus}</p>}
+          {data.map((dat1, index) => (
+            <p key={index}>
+              {dat1.available ? (
+                <span className="available">
+                  <MdOutlineEventAvailable /> Available
+                </span>
+              ) : (
+                <span className="notavailable">
+                  <CgUnavailable /> Booked
+                </span>
+              )}
+            </p>
+          ))}
 
           <button
             type="button"
@@ -82,7 +81,7 @@ const OceanVilla = () => {
           >
             View Details
           </button>
-          <button type="button" className="btn btn-success">
+          <button type="button" className="btn btn-success " >
             <Link to="/BookResort" className="text-decoration-none text-white">
               Book Now
             </Link>
@@ -122,6 +121,7 @@ const OceanVilla = () => {
               </p>
               <ul>
                 <li>{response.family}</li>
+                {/* <li>{response.}</li> */}
               </ul>
               <p>
                 <FcServices /> <strong>Services:</strong>

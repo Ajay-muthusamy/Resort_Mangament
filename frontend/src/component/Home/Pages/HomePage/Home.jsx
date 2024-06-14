@@ -12,7 +12,7 @@ const Home = () => {
       <Header />,
       <Oceanvilla />,
       <Mountvilla />,
-      <LuxaryResort />
+      <LuxaryResort />,
     </div>
   )
 }

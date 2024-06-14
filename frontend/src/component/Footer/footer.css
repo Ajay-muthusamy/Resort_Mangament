@@ -1,0 +1,18 @@
+#flexContainer{
+    display: flex;
+    gap: 25%;
+    flex-wrap: wrap;
+}
+li{
+    margin-top: 10px;
+}
+button {
+    background-color: rgb(16, 76, 151);
+    color: white;
+    padding: 7px 20px;
+    border: none;
+}
+#btn{
+    border: none;
+    border-radius: 5px;
+}
