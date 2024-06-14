@@ -1,7 +1,7 @@
 import pool from "./db.js";
 export const oceanvilla = async(req,res)=>{
     try {
-        const result = await pool.query("SELECT *from oceanvilla_detail");
+        const result = await pool.query("SELECT *from oceanvilla_detail WHERE name='Ocean Villa Maladives'");
         res.json(result.rows);
       } catch (error) {
         console.log('error in fetch data form oceanvilla table');
@@ -15,4 +15,15 @@ export const isBooked =async(req,res)=>{
   } catch (error) {
     
   }
+}
+
+export const MountainVilla = async(req,res)=>{
+  try {
+    const result = await pool.query("SELECT * FROM oceanvilla_detail WHERE name = 'Mountain Villa Munnar'");
+    res.json(result.rows);
+  } catch (error) {
+    console.log('Error in the MountainVilla select Query');
+    res.status(500).send('Mountain Villa error internal error');
+  }
+
 }

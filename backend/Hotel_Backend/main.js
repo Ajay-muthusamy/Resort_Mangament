@@ -3,6 +3,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import pool from './db.js';
 import { oceanvilla } from './ResortDetails.js';
+import { MountainVilla } from './ResortDetails.js';
 import { isBooked } from './ResortDetails.js';
 import { TotalMemberCount } from './Admin_DB/DataCount.js';
 import { oceanvillaDetail } from './Admin_DB/userResortDetails/UserResorts.js';
@@ -84,12 +85,36 @@ app.post("/User/BookingDetails", async (req, res) => {
     res.send("Error in Inserting Data!!");
   }
 });
+
+// app.post("/Room",(req,res)=>{
+//   const 
+// })
+app.post('/api/book-room', async (req, res) => {
+  const { personName, phone, RoomName, Rent } = req.body;
+
+  try {
+    const query = `
+      INSERT INTO bookings (personName, phone, roomName, rent)
+      VALUES ($1, $2, $3, $4)
+      RETURNING *;
+    `;
+
+    const values = [personName, phone, RoomName, Rent];
+
+    const result = await pool.query(query, values);
+    res.status(200).json(result.rows[0]);
+  } catch (error) {
+    console.error('Error inserting booking:', error);
+    res.status(500).json({ error: 'Internal server error' }); 
+  }
+});
 // fetch data and display in Frontend
 app.get('/oceanvilla/detail',oceanvilla)
 app.get('/Resort/isBooked',isBooked)
 app.get('/data/count',TotalMemberCount);
 app.get('/ResortUser/Details',oceanvillaDetail);
 app.get('/generate-pdf/:resort', PDFGen);
+app.get('/mountainvilla/detail', MountainVilla);
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
