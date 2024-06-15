@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import pool from './db.js';
+// import pool from './db.js';
 import { oceanvilla } from './ResortDetails.js';
 import { MountainVilla } from './ResortDetails.js';
 import { isBooked } from './ResortDetails.js';
@@ -12,6 +12,10 @@ import { RoomBookerDetail } from './Admin_DB/userResortDetails/UserResorts.js';
 import { RoomOffer } from './ResortDetails.js';
 import { ResortUpdates } from './Admin_DB/userResortDetails/UserResorts.js';
 import { OotyResort } from './ResortDetails.js';
+import pkg from 'pg';
+const { Pool } = pkg;
+import dotenv from 'dotenv';
+dotenv.config();
 
 const app = express();
 const port = 1212;
@@ -20,6 +24,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors())
 
+const pool = new Pool({
+  user: process.env.PSQL_USER,
+  host: process.env.PSQL_HOST,
+  database: process.env.PSQL_DATABASE,
+  password: process.env.PSQL_PASSWORD,
+  port: process.env.PSQL_PORT,
+  });
 pool.connect((err) => {
   if (err) {
     console.log("Error connecting to PostgreSQL:", err);
