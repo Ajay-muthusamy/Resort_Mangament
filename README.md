@@ -36,11 +36,4 @@ The backend is powered by Express.js and Node.js, providing a robust server-side
 
 
 
-In the "Contributors" section:
-
-- Replace `Your Name`, `Contributor Name`, `Role/Contribution`, and `[GitHub Profile]` with actual contributors' names, roles, and their GitHub profiles.
-- Ensure you provide a brief description of each contributor's role or contribution to the project.
-
-This section acknowledges and credits the individuals who have contributed to the project, helping to give proper recognition to their efforts. Adjust the format and content as per the actual contributors and their respective roles in your project.
-
 
