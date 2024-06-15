@@ -14,7 +14,7 @@ import { ResortUpdates } from './Admin_DB/userResortDetails/UserResorts.js';
 import { OotyResort } from './ResortDetails.js';
 
 const app = express();
-const port = 3000;
+const port = 1212;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
