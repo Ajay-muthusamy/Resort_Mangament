@@ -32,17 +32,17 @@ const sidebar = () => {
             <NavLink exact to="/ResortBookingDetails" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="table">Booking Detail</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/profile" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="user">Profile page</CDBSidebarMenuItem>
+            <NavLink exact to="/RoomBooker" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="user">Rooms</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/Count" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="columns">
                 Dashboard
                 </CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/analytics" activeClassName="activeClicked">
+            <NavLink exact to="/ResortUpdate" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="chart-line">
-                Analytics
+                Updates
               </CDBSidebarMenuItem>
             </NavLink>
 
@@ -52,9 +52,6 @@ const sidebar = () => {
               target="_blank"
               activeClassName="activeClicked"
             >
-              <CDBSidebarMenuItem icon="exclamation-circle">
-                404 page
-              </CDBSidebarMenuItem>
             </NavLink>
           </CDBSidebarMenu>
         </CDBSidebarContent>

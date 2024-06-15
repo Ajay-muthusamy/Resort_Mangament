@@ -27,3 +27,25 @@ export const MountainVilla = async(req,res)=>{
   }
 
 }
+
+export const RoomOffer = async(req,res)=>{
+  try {
+    const result = await pool.query("SELECT * FROM Offer");
+    res.json(result.rows);
+  } catch (error) {
+    console.log('Error in the MountainVilla select Query');
+    res.status(500).send('Mountain Villa error internal error');
+  }
+
+}
+
+export const OotyResort = async(req,res)=>{
+  try {
+    const result = await pool.query("SELECT * FROM oceanvilla_detail WHERE name = 'Luxary Resort Coorg'");
+    res.json(result.rows);
+  } catch (error) {
+    console.log('Error in the MountainVilla select Query');
+    res.status(500).send('Mountain Villa error internal error');
+  }
+
+}

@@ -32,14 +32,9 @@ const navbar = () => {
                 </Link>
               </li>
               <li className="nav-item ">
-                <a className="nav-link " href="#">
-                  Pricing
-                </a>
-              </li>
-              <li className="nav-item text-white">
-                <a className="nav-link  " aria-disabled="true">
-                  Signup
-                </a>
+                <Link to="/RoomOffer" className="nav-link ">
+                Pricing
+                </Link> 
               </li>
             </ul>
           </div>

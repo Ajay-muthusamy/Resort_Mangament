@@ -32,6 +32,7 @@ const room = () => {
                 style={{ width: "300px" }}
               />
             </div>
+            <p className="text-end">Paraside Chennai 124 1 J.N. Salai, Guindy Chennai, 600032 India</p>
           </div>
           <div>
             <ul className="list-unstyled d-flex flex-wrap gap-3">
@@ -43,7 +44,6 @@ const room = () => {
             </ul>
             <hr />
           </div>
-          
         </div>
       </div>
     </div>

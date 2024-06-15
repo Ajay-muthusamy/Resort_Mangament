@@ -1,0 +1,29 @@
+.body{
+    background-color:rgb(67, 18, 161);
+    padding: 30%;
+}
+.ratebox{
+    background-color:rgb(115, 82, 176);
+    color: white;
+    border-radius: 5px;
+    padding: 15%;
+}
+/* RoomOffer.css */
+
+.card {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Box shadow with a slight blur */
+    transition: box-shadow 0.3s ease; /* Smooth transition for hover effect */
+  }
+  
+  .card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+  }
+  
+  .ratebox {
+    border-bottom: 1px solid #ccc; /* Example border style for ratebox */
+  }
+  
+  .card-body {
+    padding: 20px; /* Example padding for card body */
+  }
+  

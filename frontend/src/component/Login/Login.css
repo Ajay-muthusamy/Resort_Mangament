@@ -1,0 +1,12 @@
+#frm{
+    width: 50vh;
+}
+form{
+    font-size: 16px;
+}
+.primary{
+    color: orange;
+}
+.btn1{
+    padding: 5%;
+}

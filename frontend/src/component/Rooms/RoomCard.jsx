@@ -17,7 +17,7 @@ const RoomCard = (props) => {
             <img src={props.image} className="card-img-top" alt="..." />
             <div className="card-body">
               <h5 className="card-title">{props.name}</h5>
-              <a href="" className="text-decoration-none">View Details</a>
+              {/* <a href="" className="text-decoration-none">View Details</a> */}
               <br />
               <button className='mt-3' id='btn' onClick={handleShow}>
                 Book Now {props.rent}

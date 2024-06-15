@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Outlet, Link } from "react-router-dom";
-import luxResortImage from '../../../assets/luxResort.jpg.jpg'
+import luxResortImage from '../../../assets/luxResort.jpg.jpg';
 import {
   MdEventAvailable,
   MdLunchDining,
@@ -14,10 +14,30 @@ import { MdOutlineReduceCapacity } from "react-icons/md";
 import { FcServices } from "react-icons/fc";
 import { Button, Modal } from "react-bootstrap";
 
-const luxaryResort = () => {
+const LuxaryResort = () => {
+  const [data, setData] = useState([]);
   const [show, setShow] = useState(false);
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/OotyResort');
+        const result = await response.json();
+        console.log(result); 
+        if (result && result.data) {
+          setData(result.data);
+        } else {
+          console.log('Invalid response structure:', result);
+        }
+      } catch (error) {
+        console.log('error', error);
+      }
+    };
+    fetchData();
+  }, []);
 
   return (
     <div>
@@ -28,12 +48,12 @@ const luxaryResort = () => {
           style={{ width: "30%" }}
           className="rounded img-fluid me-3"
         />
-        <div className="contant w-50">
+        <div className="content w-50">
           <h5>
-          Welcome to Paraside, where luxury meets nature in Coorg. Enjoy our luxury accommodation, Families can relax while kids enjoy our facilities. Plan your event or wedding with us. Book your stay now!
+            Welcome to Paradise, where luxury meets nature in Coorg. Enjoy our luxury accommodation. Families can relax while kids enjoy our facilities. Plan your event or wedding with us. Book your stay now!
           </h5>
           <p>
-          Paraside in Coorg offers unmatched luxury amidst breathtaking natural surroundings. Book your stay now for an unforgettable experience!
+            Paradise in Coorg offers unmatched luxury amidst breathtaking natural surroundings. Book your stay now for an unforgettable experience!
           </p>
           <h6 className="avail">
             <MdEventAvailable /> Available
@@ -55,84 +75,74 @@ const luxaryResort = () => {
           <Modal.Title>Ocean Villa</Modal.Title>
         </Modal.Header>
         <Modal.Body className="p-5">
-          <p>
-            <IoLocationSharp /> Maldives, Indian Ocean.
-          </p>
-          <bold>
-            <p>
-              <FaCity /> Accommodation:
-            </p>
-          </bold>
-          <ul>
-            <li>Luxurious overwater bungalows or beach villas.</li>
-            <li>
-              Modern amenities, some with unique features like glass floors.
-            </li>
-          </ul>
-          <p>
-            <MdOutlineReduceCapacity /> Capacity:
-          </p>
-          <ul>
-            <li>The resort can accommodate up to 10 guests at a time.</li>
-          </ul>
-          <p>
-            <MdLunchDining /> Dining:
-          </p>
-          <ul>
-            <li>Multiple restaurants offering diverse cuisines.</li>
-            <li>Romantic beach dinners, bars with ocean views.</li>
-          </ul>
-          <p>
-            <MdLocalActivity /> Activities:
-          </p>
-          <ul>
-            <li>Water sports, excursions, wellness activities.</li>
-            <li>Indoor options like billiards and board games.</li>
-          </ul>
-          <p>
-            <MdOutlineFamilyRestroom /> Family:
-          </p>
-          <ul>
-            <li>Kids' clubs, family-friendly amenities, excursions.</li>
-          </ul>
-          <p>
-            <FcServices /> Services:
-          </p>
-          <ul>
-            <li>
-              24-hour concierge, personalized services, airport transfers.
-            </li>
-          </ul>
-          <p>
-            <MdBedroomParent /> Rent:
-          </p>
-          <ul>
-            <li>
-              Day rates for a standard room can range from approximately{" "}
-              <mark>14,000 INR to 56,000 INR </mark> or more per person per day.
-            </li>
-            <li>
-              Day rates for overwater bungalows or beach villas can start from
-              approximately 35,000 INR to 105,000 INR or higher per person per
-              day.
-            </li>
-          </ul>
-          <h3>Note:</h3>
-          <h6>
-            Certainly! Here's a condensed version:{" "}
-            <span className="mark">
-              "Free cancellation is available within 5 days of booking
-            </span>
-            . After this period, a cancellation fee may apply."
-          </h6>
-          <p className="p-5">
-            "50% refund available for cancellations made after the 5-day booking
-            period."
-          </p>
-          <p>
-            You're welcome! If you have any more questions or need further
-            assistance, feel free to reach out. I'm here to help!
-          </p>
+          {data && data.length > 0 ? (
+            data.map((dat, index) => (
+              <div key={index}>
+                <p>
+                  <IoLocationSharp /> {dat.location}
+                </p>
+                <p>
+                  <FaCity /> {dat.accommodation}
+                </p>
+                <p>
+                  <MdOutlineReduceCapacity /> {dat.capacity}
+                </p>
+                <p>
+                  <MdLunchDining /> {dat.dining}
+                </p>
+                <p>
+                  <MdLocalActivity /> Activities:
+                </p>
+                <ul>
+                  <li>Water sports, excursions, wellness activities.</li>
+                  <li>Indoor options like billiards and board games.</li>
+                </ul>
+                <p>
+                  <MdOutlineFamilyRestroom /> {dat.family}
+                </p>
+                <ul>
+                  <li>Kids' clubs, family-friendly amenities, excursions.</li>
+                </ul>
+                <p>
+                  <FcServices /> {dat.service}
+                </p>
+                <ul>
+                  <li>24-hour concierge, personalized services, airport transfers.</li>
+                </ul>
+                <p>
+                  <MdBedroomParent /> Rent:
+                </p>
+                <ul>
+                  <li>
+                    Day rates for a standard room can range from approximately{" "}
+                    <mark>{dat.rent} INR</mark> or more per person per day.
+                  </li>
+                  <li>
+                    Day rates for overwater bungalows or beach villas can start from
+                    approximately 35,000 INR to 105,000 INR or higher per person per
+                    day.
+                  </li>
+                </ul>
+                <h3>Note:</h3>
+                <h6>
+                  <span className="mark">
+                    {dat.note}
+                  </span>
+                  . After this period, a cancellation fee may apply."
+                </h6>
+                <p className="p-5">
+                  "50% refund available for cancellations made after the 5-day booking
+                  period."
+                </p>
+                <p>
+                  You're welcome! If you have any more questions or need further
+                  assistance, feel free to reach out. I'm here to help!
+                </p>
+              </div>
+            ))
+          ) : (
+            <p>No data available</p>
+          )}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
@@ -145,4 +155,4 @@ const luxaryResort = () => {
   );
 };
 
-export default luxaryResort;
+export default LuxaryResort;

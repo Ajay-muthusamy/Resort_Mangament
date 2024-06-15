@@ -8,7 +8,10 @@ import { isBooked } from './ResortDetails.js';
 import { TotalMemberCount } from './Admin_DB/DataCount.js';
 import { oceanvillaDetail } from './Admin_DB/userResortDetails/UserResorts.js';
 import { PDFGen } from './Admin_DB/PDF/gPdf.js';
-
+import { RoomBookerDetail } from './Admin_DB/userResortDetails/UserResorts.js';
+import { RoomOffer } from './ResortDetails.js';
+import { ResortUpdates } from './Admin_DB/userResortDetails/UserResorts.js';
+import { OotyResort } from './ResortDetails.js';
 
 const app = express();
 const port = 3000;
@@ -108,6 +111,22 @@ app.post('/api/book-room', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' }); 
   }
 });
+app.post('/api/login', async (req, res) => {
+  const { name,email } = req.body;
+  try {
+    const query = `
+      INSERT INTO Login (name, email)
+      VALUES ($1, $2)
+      RETURNING *;
+    `;
+    const values = [name,email];
+    const result = await pool.query(query, values);
+    res.status(200).json(result.rows[0]);
+  } catch (error) {
+    console.error('Error inserting booking:', error);
+    res.status(500).json({ error: 'Internal server error' }); 
+  }
+});
 // fetch data and display in Frontend
 app.get('/oceanvilla/detail',oceanvilla)
 app.get('/Resort/isBooked',isBooked)
@@ -115,7 +134,10 @@ app.get('/data/count',TotalMemberCount);
 app.get('/ResortUser/Details',oceanvillaDetail);
 app.get('/generate-pdf/:resort', PDFGen);
 app.get('/mountainvilla/detail', MountainVilla);
-
+app.get('/RoomBooker/Detail', RoomBookerDetail);
+app.get('/Room/Offer',RoomOffer);
+app.post('/Resort/Update',ResortUpdates);
+app.get('/OotyResort',OotyResort);
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
