@@ -34,8 +34,6 @@ The backend is powered by Express.js and Node.js, providing a robust server-side
 - **Database:** PostgreSQL
 - **Deployment:** Heroku (example)
 
-## Installation
-
 
 
 In the "Contributors" section:
